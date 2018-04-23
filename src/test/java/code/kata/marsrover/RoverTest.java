@@ -24,17 +24,53 @@ public class RoverTest {
 
     @Test
     public void aMarsRover_shouldAcceptSingleLetterCommandsToChangePosition() {
-        Rover rover = new Rover(5, 10, EAST);
+        Rover eastFacingRover = new Rover(5, 10, EAST);
 
-        rover.executeCommands("f");
-        assertThat(rover.getPositionX(), equalTo(6));
-        assertThat(rover.getPositionY(), equalTo(10));
-        assertThat(rover.getDirection(), equalTo(EAST));
+        eastFacingRover.executeCommands("f");
+        assertThat(eastFacingRover.getPositionX(), equalTo(6));
+        assertThat(eastFacingRover.getPositionY(), equalTo(10));
+        assertThat(eastFacingRover.getDirection(), equalTo(EAST));
 
-        rover.executeCommands("b");
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
-        assertThat(rover.getDirection(), equalTo(EAST));
+        eastFacingRover.executeCommands("b");
+        assertThat(eastFacingRover.getPositionX(), equalTo(5));
+        assertThat(eastFacingRover.getPositionY(), equalTo(10));
+        assertThat(eastFacingRover.getDirection(), equalTo(EAST));
+
+        Rover westFacingRover = new Rover(5, 10, WEST);
+
+        westFacingRover.executeCommands("f");
+        assertThat(westFacingRover.getPositionX(), equalTo(4));
+        assertThat(westFacingRover.getPositionY(), equalTo(10));
+        assertThat(westFacingRover.getDirection(), equalTo(WEST));
+
+        westFacingRover.executeCommands("b");
+        assertThat(westFacingRover.getPositionX(), equalTo(5));
+        assertThat(westFacingRover.getPositionY(), equalTo(10));
+        assertThat(westFacingRover.getDirection(), equalTo(WEST));
+
+        Rover northFacingRover = new Rover(5, 10, NORTH);
+
+        northFacingRover.executeCommands("f");
+        assertThat(northFacingRover.getPositionX(), equalTo(5));
+        assertThat(northFacingRover.getPositionY(), equalTo(11));
+        assertThat(northFacingRover.getDirection(), equalTo(NORTH));
+
+        northFacingRover.executeCommands("b");
+        assertThat(northFacingRover.getPositionX(), equalTo(5));
+        assertThat(northFacingRover.getPositionY(), equalTo(10));
+        assertThat(northFacingRover.getDirection(), equalTo(NORTH));
+
+        Rover southFacingRover = new Rover(5, 10, SOUTH);
+
+        southFacingRover.executeCommands("f");
+        assertThat(southFacingRover.getPositionX(), equalTo(5));
+        assertThat(southFacingRover.getPositionY(), equalTo(9));
+        assertThat(southFacingRover.getDirection(), equalTo(SOUTH));
+
+        southFacingRover.executeCommands("b");
+        assertThat(southFacingRover.getPositionX(), equalTo(5));
+        assertThat(southFacingRover.getPositionY(), equalTo(10));
+        assertThat(southFacingRover.getDirection(), equalTo(SOUTH));
     }
 
     @Test
