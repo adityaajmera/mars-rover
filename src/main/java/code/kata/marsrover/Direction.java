@@ -1,5 +1,8 @@
 package code.kata.marsrover;
 
 public enum Direction {
-    WEST, EAST
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST
 }

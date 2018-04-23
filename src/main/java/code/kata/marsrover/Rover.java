@@ -22,4 +22,33 @@ public class Rover {
     public Direction getDirection() {
         return direction;
     }
+
+    public void executeCommands(String commands) {
+        switch (commands) {
+            case "f":
+                this.x++;
+                break;
+            case "b":
+                this.x--;
+                break;
+            case "l":
+                rotateCounterClockwise();
+                break;
+            case "r":
+                rotateClockwise();
+                break;
+        }
+    }
+
+    private void rotateCounterClockwise() {
+        int positionOfDirectionInArray = this.direction.ordinal();
+        int indexOfPreviousDirection = (4 + positionOfDirectionInArray - 1) % 4;
+        this.direction = Direction.values()[indexOfPreviousDirection];
+    }
+
+    private void rotateClockwise() {
+        int positionOfDirectionInArray = this.direction.ordinal();
+        int indexOfNextDirection = (positionOfDirectionInArray + 1) % 4;
+        this.direction = Direction.values()[indexOfNextDirection];
+    }
 }
