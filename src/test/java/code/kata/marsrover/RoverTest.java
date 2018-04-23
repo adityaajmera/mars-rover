@@ -23,6 +23,42 @@ public class RoverTest {
     }
 
     @Test
+    public void aMarsRover_shouldMoveForwardInADirectionThatIsTheSameAsMovingBackwardsInAnOppositeDirection() {
+        asList(
+                asList(EAST, WEST),
+                asList(WEST, EAST),
+                asList(NORTH, SOUTH),
+                asList(SOUTH, NORTH)
+        ).forEach((opposites) -> {
+            Direction direction = opposites.get(0);
+            Direction oppositeDirection = opposites.get(1);
+
+            Rover roverFacingDirection = new Rover(5, 5, direction);
+            Rover roverFacingOppositeDirection = new Rover(5, 5, oppositeDirection);
+
+            roverFacingDirection.executeCommands("f");
+            roverFacingOppositeDirection.executeCommands("b");
+
+            assertThat(roverFacingDirection.getPositionX(), equalTo(roverFacingOppositeDirection.getPositionX()));
+            assertThat(roverFacingDirection.getPositionY(), equalTo(roverFacingOppositeDirection.getPositionY()));
+        });
+    }
+
+    @Test
+    public void aMarsRover_shouldReturnToItsOriginalPositionWhenMovingForwardsAndThenBackwards() {
+        asList(EAST, WEST, NORTH, SOUTH).forEach((direction -> {
+            Rover rover = new Rover(0, 0, direction);
+
+            rover.executeCommands("f");
+            rover.executeCommands("b");
+
+            assertThat(rover.getPositionX(), equalTo(0));
+            assertThat(rover.getPositionY(), equalTo(0));
+            assertThat(rover.getDirection(), equalTo(direction));
+        }));
+    }
+
+    @Test
     public void aMarsRover_shouldAcceptSingleLetterCommandsToChangePosition() {
         Rover eastFacingRover = new Rover(5, 10, EAST);
 
