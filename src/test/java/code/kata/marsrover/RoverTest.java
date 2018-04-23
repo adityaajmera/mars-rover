@@ -3,6 +3,7 @@ package code.kata.marsrover;
 import org.junit.Test;
 
 import static code.kata.marsrover.Direction.*;
+import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
@@ -40,44 +41,18 @@ public class RoverTest {
     public void aMarsRover_shouldAcceptSingleLetterCommandsToChangeDirection() {
         Rover rover = new Rover(5, 10, EAST);
 
-        rover.executeCommands("l");
-        assertThat(rover.getDirection(), equalTo(NORTH));
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
+        asList(NORTH, WEST, SOUTH, EAST).forEach(nextExpectedDirection -> {
+            rover.executeCommands("l");
+            assertThat(rover.getDirection(), equalTo(nextExpectedDirection));
+            assertThat(rover.getPositionX(), equalTo(5));
+            assertThat(rover.getPositionY(), equalTo(10));
+        });
 
-        rover.executeCommands("r");
-        assertThat(rover.getDirection(), equalTo(EAST));
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
-
-        rover.executeCommands("r");
-        assertThat(rover.getDirection(), equalTo(SOUTH));
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
-
-        rover.executeCommands("r");
-        assertThat(rover.getDirection(), equalTo(WEST));
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
-
-        rover.executeCommands("r");
-        assertThat(rover.getDirection(), equalTo(NORTH));
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
-
-        rover.executeCommands("l");
-        assertThat(rover.getDirection(), equalTo(WEST));
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
-
-        rover.executeCommands("l");
-        assertThat(rover.getDirection(), equalTo(SOUTH));
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
-
-        rover.executeCommands("l");
-        assertThat(rover.getDirection(), equalTo(EAST));
-        assertThat(rover.getPositionX(), equalTo(5));
-        assertThat(rover.getPositionY(), equalTo(10));
+        asList(SOUTH, WEST, NORTH, EAST).forEach(nextExpectedDirection -> {
+            rover.executeCommands("r");
+            assertThat(rover.getDirection(), equalTo(nextExpectedDirection));
+            assertThat(rover.getPositionX(), equalTo(5));
+            assertThat(rover.getPositionY(), equalTo(10));
+        });
     }
 }
