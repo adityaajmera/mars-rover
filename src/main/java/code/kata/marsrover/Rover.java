@@ -32,38 +32,32 @@ public class Rover {
         }
     }
 
-    private void moveBackwards() {
-        switch (direction){
-            case EAST:
-                this.x--;
-                break;
-            case WEST:
-                this.x++;
-                break;
-            case NORTH:
-                this.y--;
-                break;
-            case SOUTH:
-                this.y++;
-                break;
-        }
+    private void moveForward() {
+        this.x += xVelocity(direction);
+        this.y += yVelocity(direction);
     }
 
-    private void moveForward() {
-        switch (direction){
-            case EAST:
-                this.x++;
-                break;
-            case WEST:
-                this.x--;
-                break;
-            case NORTH:
-                this.y++;
-                break;
-            case SOUTH:
-                this.y--;
-                break;
+    private void moveBackwards() {
+        this.x -= xVelocity(direction);
+        this.y -= yVelocity(direction);
+    }
+
+    private int xVelocity(Direction direction) {
+        switch (direction) {
+            case EAST: return 1;
+            case WEST: return -1;
         }
+
+        return 0;
+    }
+
+    private int yVelocity(Direction direction) {
+        switch (direction) {
+            case NORTH: return 1;
+            case SOUTH: return -1;
+        }
+
+        return 0;
     }
 
     private void rotateCounterClockwise() {
